@@ -20,7 +20,7 @@ import java.util.Properties;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class CosmoDbContainerTest {
+public class CosmosDbContainerTest {
 
     private static Properties originalSystemProperties;
 
@@ -43,7 +43,7 @@ public class CosmoDbContainerTest {
     );
 
     @Test
-    public void testWithCosmosClient() throws Exception {
+    public void testWithCosmosDBClient() throws Exception {
         Path keyStoreFile = tempFolder.newFile("azure-cosmos-emulator.keystore").toPath();
         KeyStore keyStore = emulator.buildNewKeyStore();
         keyStore.store(new FileOutputStream(keyStoreFile.toFile()), emulator.getEmulatorKey().toCharArray());
