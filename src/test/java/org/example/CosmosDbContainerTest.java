@@ -15,6 +15,7 @@ import org.testcontainers.utility.DockerImageName;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.security.KeyStore;
+import java.time.Duration;
 import java.util.Properties;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,7 +41,7 @@ public class CosmosDbContainerTest {
     @Rule
     public CosmosDBEmulatorContainer emulator = new CosmosDBEmulatorContainer(
             DockerImageName.parse("mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest")
-    );
+    ).withStartupTimeout(Duration.ofMinutes(2));
 
     @Test
     public void testWithCosmosDBClient() throws Exception {
