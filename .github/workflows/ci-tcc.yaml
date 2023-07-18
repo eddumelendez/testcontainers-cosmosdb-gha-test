@@ -3,6 +3,8 @@ name: Java CI with Maven (TCC)
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -27,7 +29,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
       - name: Setup testcontainers-cloud
-        uses: atomicjar/testcontainers-cloud-setup-action@main
+        uses: atomicjar/testcontainers-cloud-setup-action@support_project_keys
       - uses: actions/setup-java@v3
         with:
           java-version: '8.0.345'
