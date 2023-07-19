@@ -32,6 +32,7 @@ jobs:
         uses: atomicjar/testcontainers-cloud-setup-action@support_project_keys
         with:
           version: next
+          project-key: cosmosdb
         env:
           TC_CLOUD_LOGS_VERBOSE: true
       - uses: actions/setup-java@v3
