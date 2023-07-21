@@ -29,10 +29,7 @@ jobs:
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
       - name: Setup testcontainers-cloud
-        uses: atomicjar/testcontainers-cloud-setup-action@support_project_keys
-        with:
-          version: next
-          project-key: cosmosdb
+        uses: atomicjar/testcontainers-cloud-setup-action@main
         env:
           TC_CLOUD_LOGS_VERBOSE: true
       - uses: actions/setup-java@v3
