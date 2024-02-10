@@ -10,6 +10,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.testcontainers.containers.CosmosDBEmulatorContainer;
+import org.testcontainers.containers.wait.strategy.Wait;
 import org.testcontainers.utility.DockerImageName;
 
 import java.io.FileOutputStream;
@@ -41,7 +42,9 @@ public class CosmosDbContainerTest {
     @Rule
     public CosmosDBEmulatorContainer emulator = new CosmosDBEmulatorContainer(
             DockerImageName.parse("mcr.microsoft.com/cosmosdb/linux/azure-cosmos-emulator:latest")
-    ).withStartupTimeout(Duration.ofMinutes(2));
+    )
+            .waitingFor(Wait.forHttps("/_explorer/emulator.pem").forStatusCode(200).allowInsecure())
+            .withStartupTimeout(Duration.ofMinutes(5));
 
     @Test
     public void testWithCosmosDBClient() throws Exception {
