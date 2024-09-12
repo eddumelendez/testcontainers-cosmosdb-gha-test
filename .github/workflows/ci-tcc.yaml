@@ -3,6 +3,8 @@ name: Java CI with Maven (TCC)
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -19,15 +21,17 @@ jobs:
         os: [ ubuntu-latest, windows-latest, macos-latest ]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2
       - name: Cache local Maven repository
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-maven-
       - name: Setup testcontainers-cloud
         uses: atomicjar/testcontainers-cloud-setup-action@main
+        env:
+          TC_CLOUD_LOGS_VERBOSE: true
       - uses: actions/setup-java@v3
         with:
           java-version: '8.0.345'
